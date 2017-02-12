@@ -235,29 +235,3 @@ class Model(dict, metaclass=ModelMetaclass):
         rows = await execute(self.__delete__, args)
         if rows != 1:
             logging.warn('failed to remove by primary key: affected rows: %s' % rows)
-
-
-class User(Model):
-    __table__ = 'user'
-    #定义类的属性到列的映射
-    id = IntegerField('id', primary_key=True)
-    name = StringField('username')
-    email = StringField('email')
-    password = StringField('password')
-
-loop = asyncio.get_event_loop()
-async def test():
-    await crate_pool(loop=loop, host='localhost', port=3306, user='root', password='', db='test')
-    r = await User.findAll()
-    print(1, r)
-    r = await User.find(1)
-    print(2, r)
-    # u = User(id=3, name='hehe', email='a@example.com', password='123456')
-    # await u.save()
-    # print(u)
-    await destroy_pool()
-# loop.run_until_complete(test())
-loop.close()
-if loop.is_closed():
-    sys.exit(0)
-
