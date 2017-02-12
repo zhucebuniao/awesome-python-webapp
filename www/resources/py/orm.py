@@ -256,7 +256,7 @@ async def test():
     # await u.save()
     # print(u)
     await destroy_pool()
-loop.run_until_complete(test())
+# loop.run_until_complete(test())
 loop.close()
 if loop.is_closed():
     sys.exit(0)
